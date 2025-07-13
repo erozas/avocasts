@@ -65,4 +65,8 @@ group :test do
 end
 
 
+gem 'avo'
+gem 'avo-advanced', source: 'https://packager.dev/avo-hq'
+gem 'avo-rhino_field', source: 'https://packager.dev/avo-hq'
+
 gem "refer"
