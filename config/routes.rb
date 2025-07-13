@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resource :session
+  resources :registrations
+  get "dashboard", to: "dashboard#show"
   root "pages#home"
 end
