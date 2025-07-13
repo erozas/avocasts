@@ -1,11 +1,66 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="flex items-center justify-center pt-16 pb-24">
+  <div class="max-w-lg w-full space-y-8 bg-white rounded-lg">
+    <div>
+      <h2 class="text-3xl font-extrabold text-gray-900">
+        Log in
+      </h2>
+      <p class="mt-1 text-sm text-gray-600">
+        Or
+        <%= link_to "sign up for a new account", new_registration_path, class: "font-medium text-indigo-600 hover:text-indigo-500" %>
+      </p>
+    </div>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+    <%= form_with model: @user, url: session_path, class: "mt-8 space-y-6" do |f| %>
+      <%= render "shared/form_errors", object: @user %>
+      <div class="space-y-4">
+        <div>
+          <%= f.label :email_address, class: "block text-sm font-medium text-slate-900" %>
+          <%= f.email_field :email_address, autofocus: true, autocomplete: "email", 
+              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
+              placeholder: "Email address" %>
+        </div>
+        <div>
+          <div class="flex items-center justify-between">
+            <%= f.label :password, class: "block text-sm font-medium text-slate-900" %>
+            <%= link_to "Forgot your password?", new_password_path, class: "text-xs text-slate-600 hover:text-slate-800" %>
+          </div>
+          <%= f.password_field :password, autocomplete: "current-password",
+              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+              placeholder: "Password" %>
+        </div>
+      </div>
 
-<%= link_to "Forgot password?", new_password_path %>
+      <div class="mt-6">
+        <%= f.submit "Log in", 
+            class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6">
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-2 text-slate-500 bg-white">Or continue with</span>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <div>
+          <%= link_to "", class: "w-full inline-flex justify-center py-2 px-4 border border-slate-300 rounded-md bg-white text-sm font-medium text-slate-500 hover:bg-slate-50" do %>
+            <img src="<%= asset_path('google-oauth-icon.png') %>" class="h-5 w-5" alt="Google icon">
+            <span class="ml-2">Google</span>
+          <% end %>
+        </div>
+
+        <div>
+          <%= link_to "", class: "w-full inline-flex justify-center py-2 px-4 bg-slate-800 border border-slate-300 rounded-md text-sm font-medium text-slate-100 hover:bg-slate-900" do %>
+            <%= image_tag "github-icon-white.svg", class: "h-5 w-5" %>
+            <span class="ml-2">GitHub</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

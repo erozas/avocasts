@@ -12,7 +12,7 @@
       
       <div class="flex items-center">
         <% if user_signed_in?  %>
-          <a href="/" class="text-black hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+          <%= link_to "Dashboard", dashboard_path, class: "text-black hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium" %>
           <%= button_to session_path, method: :delete, class: "text-black hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium" do %>
             Sign out
           <% end %>
