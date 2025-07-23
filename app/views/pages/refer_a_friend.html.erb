@@ -1,0 +1,74 @@
+<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
+  <div class="flex flex-col">
+    <nav class="flex items-center space-x-2">
+      <%= link_to "Home", root_path, class: "text-base text-gray-500 hover:text-gray-700" %>
+      <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <%= link_to "Refer a friend", refer_a_friend_path, class: "text-base text-gray-500 hover:text-gray-700" %>
+    </nav>
+    <h1 class="text-3xl font-bold">Refer a friend</h1>
+  </div>
+
+  <div class="grid grid-cols-12 gap-x-6 gap-y-8 mt-4">
+    <div class="col-span-12 lg:col-span-8 h-full">
+      <div class="bg-white rounded-lg border border-gray-200 shadow-xs pt-6 pb-16 px-6 h-full">
+        <h2 class="text-lg font-bold">Earn rewards for referring frieds</h2>
+        <p class="text-base text-gray-500">Share this code with your friends to earn rewards.</p>
+        <div class="mt-10">
+          <div class="grid grid-cols-12 gap-x-6">
+            <div class="col-span-12 lg:col-span-4 flex flex-col items-center">
+              <div class="bg-amber-100 justify-center rounded-full flex items-center justify-center w-16 h-16">
+                <i data-lucide="link" class="w-6 h-6 text-amber-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-center mt-3">Send Referral Link</h3>
+              <p class="text-base text-gray-500 text-center">Share your referral link with friends that might be interested in AvoCasts.</p>
+            </div>
+            <div class="col-span-12 lg:col-span-4 flex flex-col items-center">
+              <div class="bg-blue-100 justify-center rounded-full flex items-center justify-center w-16 h-16">
+                <i data-lucide="user-plus" class="w-6 h-6 text-blue-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-center mt-3">Your friends sign up</h3>
+              <p class="text-base text-gray-500 text-center">Using your link, when the sign up they will be added to your referrals.</p>
+            </div>
+            <div class="col-span-12 lg:col-span-4 flex flex-col items-center">
+              <div class="bg-emerald-100 justify-center rounded-full flex items-center justify-center w-16 h-16">
+                <i data-lucide="gift" class="w-6 h-6 text-emerald-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-center mt-3">Earn rewards!</h3>
+              <p class="text-base text-gray-500 text-center">If your friend subscribes to AvoCasts, you both earn a free month.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-12 lg:col-span-4 h-full flex flex-col space-y-3">
+      <div class="bg-white rounded-lg border border-gray-200 shadow-xs p-4 flex-1">
+        <h2 class="text-lg font-bold">Your Referral Link</h2>
+        <p class="text-sm text-gray-500">Share this link with your friends to earn rewards.</p>
+        <div class="my-3 bg-indigo-50 rounded-full px-4 py-2 relative" 
+        data-controller="copy-to-clipboard" data-action="click->copy-to-clipboard#copy"
+        data-copy-to-clipboard-value-value="<%= referral_link(current_user) %>">
+          <span class="text-sm text-indigo-900 truncate" >
+            <%= referral_link(current_user) %>
+          </span>
+          <div class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer">
+            <span class="text-sm text-indigo-600 copy-feedback">Copy link</span>
+          </div>
+        </div>
+        <div class="text-sm text-gray-500">Your friends has to sign up using your link within 30 days after you refer them.</div>
+      </div>
+      <div class="bg-white rounded-lg border border-gray-200 shadow-xs p-4 flex-1">
+        <h2 class="text-lg font-bold">Send by email</h2>
+        <p class="text-sm text-gray-500">Enter your friends email addresses separated by commas to send them the referral link.</p>
+        <%= form_with url: refer_a_friend_path, method: :post, class: "mt-4" do |f| %>
+          <div class="relative">
+            <input type="text" name="emails" class="w-full rounded-full placeholder:text-sm border border-gray-300 px-3 py-2" placeholder="Enter email addresses separated by commas"> 
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer bg-indigo-600 text-white px-4 py-1 rounded-full text-sm flex items-center space-x-1">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>Send</span>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
