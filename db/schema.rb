@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_15_032112) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_035456) do
   create_table "refer_referral_codes", force: :cascade do |t|
     t.string "referrer_type", null: false
     t.integer "referrer_id", null: false
@@ -62,7 +62,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_15_032112) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "full_name"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "refer_visits", "refer_referral_codes", column: "referral_code_id"
