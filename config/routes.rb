@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   resource :session
   resources :registrations
+  resources :referral_emails, only: [:create]
+  resources :referrals, only: [:index]
   
   get "refer-a-friend", to: "pages#refer_a_friend", as: :refer_a_friend
   get "dashboard", to: "dashboard#show"
