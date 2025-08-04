@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  set_referral_cookie
   include Authentication
+  set_referral_cookie
+  before_action :resume_session
   helper_method :user_signed_in?, :current_user
 
   private
