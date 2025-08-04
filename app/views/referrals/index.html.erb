@@ -1,0 +1,101 @@
+<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
+  <div class="grid grid-cols-12 gap-x-6 gap-y-8 mt-4">
+    <h1 class="text-3xl font-bold col-span-12">Referral History</h1>
+    <div class="col-span-12 lg:col-span-4 h-full">
+      <div class="bg-white rounded-lg border border-gray-200 shadow-xs pt-6 pb-8 px-6 h-full">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="eye" class="w-6 h-6 text-amber-500"></i>
+          <h3 class="text-base font-semibold">Referral Visits</h3>
+        </div>
+
+        <div class="mt-4 space-y-2">
+          <p class="text-5xl font-medium"><%= @referral_visits.count %></p>
+          <p class="text-sm text-gray-500">The number of times your referral code has been visited.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-4 h-full">
+      <div class="bg-white rounded-lg border border-gray-200 pt-6 pb-8 px-6 h-full">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="user-plus" class="w-6 h-6 text-blue-500"></i>
+          <h3 class="text-base font-semibold">Referred Sign-ups</h3>
+        </div>
+
+        <div class="mt-4 space-y-2">
+          <p class="text-5xl font-medium"><%= current_user.referrals.count %></p>
+          <p class="text-sm text-gray-500">The number of times your referral code has been used to sign up.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-12 lg:col-span-4 h-full">
+      <div class="bg-white rounded-lg border border-gray-200 pt-6 pb-8 px-6 h-full">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="gift" class="w-6 h-6 text-emerald-500"></i>
+          <h3 class="text-base font-semibold">Referred Subscribers</h3>
+        </div>
+
+        <div class="mt-4 space-y-2">
+          <p class="text-5xl font-medium"><%= @referred_subscribers %></p>
+          <p class="text-sm text-gray-500">The number of referred users that became subscribers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-semibold text-gray-900">Recent Referrals</h2>
+    </div>
+
+    <div class="mt-4 bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr class="bg-white">
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">User</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Referred On</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Status</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Plan</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @referrals.each do |referral| %>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="h-10 w-10 flex-shrink-0">
+                      <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name=<%= referral.full_name %>&background=6366f1&color=fff" alt="Sarah Wilson">
+                    </div>
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900"><%= referral.full_name %></div>
+                      <div class="text-sm text-gray-500"><%= referral.username %></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900"><%= referral.created_at.strftime("%B %d, %Y") %></div>
+                  <div class="text-sm text-gray-500"><%= referral.created_at.strftime("%I:%M %p") %></div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <% if referral.subscription_status == "Active" %>
+                    <div class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <%= referral.subscription_status %>
+                    </div>
+                  <% else %>
+                    <div class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">
+                      <%= referral.subscription_status %>
+                    </div>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <%= referral.subscription_plan %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
