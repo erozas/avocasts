@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
+  before_action :resume_session, only: [:new, :create]
   before_action :redirect_if_logged_in, only: %i[new create]
 
   def new
@@ -9,6 +10,7 @@ class RegistrationsController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      refer @user
       start_new_session_for @user
       redirect_to root_path, notice: "Welcome to AvoCasts! Please complete the onboarding process to get started."
     else
@@ -30,4 +32,7 @@ class RegistrationsController < ApplicationController
     params.expect(user: [:email_address, :password, :password_confirmation])
   end
 
+  def send_successful_referral_email(user)
+    UserMailer.with(user: user).successful_referral_email.deliver_later
+  end
 end
