@@ -58,8 +58,8 @@
       </div>
       <div class="bg-white rounded-lg border border-gray-200 shadow-xs p-4 flex-1">
         <h2 class="text-lg font-bold">Send by email</h2>
-        <p class="text-sm text-gray-500">Enter your friends email addresses separated by commas to send them the referral link.</p>
-        <%= form_with url: refer_a_friend_path, method: :post, class: "mt-4" do |f| %>
+        <p class="text-sm text-gray-500">Enter your friends email addresses separated by commas to send them the referral link. You can refer up to 5 friends at a time.</p>
+        <%= form_with url: referral_emails_path, method: :post, class: "mt-4" do |f| %>
           <div class="relative">
             <input type="text" name="emails" class="w-full rounded-full placeholder:text-sm border border-gray-300 px-3 py-2" placeholder="Enter email addresses separated by commas"> 
             <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer bg-indigo-600 text-white px-4 py-1 rounded-full text-sm flex items-center space-x-1">
