@@ -1,5 +1,5 @@
 module UsersHelper
   def referral_link(user)
-    root_url(code: user.referral_code)
+    root_url(ref: user.referral_code)
   end
 end
